@@ -113,7 +113,7 @@ pub fn parse_freebsd_sysctl(text: &str) -> Option<SysMemory> {
 
 /// Total and available physical memory, when the system reports them.
 pub fn memory() -> Option<SysMemory> {
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     {
         return parse_meminfo(&std::fs::read_to_string("/proc/meminfo").ok()?);
     }
